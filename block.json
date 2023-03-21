@@ -1,15 +1,32 @@
 {
 	"apiVersion": 2,
-	"name": "create-block/boilerplate",
-	"title": "Boilerplate",
+	"name": "dominicvogl/latest-posts",
+	"title": "Latest Posts",
 	"category": "widgets",
-	"icon": "smiley",
-	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"icon": "admin-post",
+	"description": "Display and filter latest post (types)",
+	"keywords": [
+		"latest",
+		"posts",
+		"post",
+		"types",
+		"filter"
+	],
 	"supports": {
 		"html": false
 	},
-	"textdomain": "boilerplate",
+	"textdomain": "latest-posts",
 	"editorScript": "file:./build/index.js",
 	"editorStyle": "file:./build/index.css",
-	"style": "file:./build/style-index.css"
+	"style": "file:./build/style-index.css",
+	"attributes": {
+		"numberOfPosts": {
+			"type": "number",
+			"default": 4
+		},
+		"displayFeaturedImage": {
+			"type": "boolean",
+			"default": false
+		}
+	}
 }
