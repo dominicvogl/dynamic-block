@@ -22,7 +22,7 @@
 	"attributes": {
 		"numberOfPosts": {
 			"type": "number",
-			"default": 2
+			"default": 4
 		},
 		"displayFeaturedImage": {
 			"type": "boolean",
