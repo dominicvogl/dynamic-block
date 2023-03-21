@@ -10,3 +10,12 @@
 	color: #fff;
 	padding: 2px;
 }
+
+.wp-block-dominicvogl-latest-posts {
+	&.wp-block-dominicvogl-latest-posts {
+		list-style: none;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+		grid-gap: var(--gap-medium);
+	}
+}
