@@ -1,8 +1,8 @@
 {
 	"apiVersion": 2,
-	"name": "dominicvogl/latest-posts",
-	"title": "Latest Posts",
-	"category": "widgets",
+	"name": "ifdigital/entity-loop",
+	"title": "Entity Loop",
+	"category": "images-alt2",
 	"icon": "admin-post",
 	"description": "Display and filter latest post (types)",
 	"keywords": [
@@ -13,7 +13,11 @@
 		"filter"
 	],
 	"supports": {
-		"html": false
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		]
 	},
 	"textdomain": "latest-posts",
 	"editorScript": "file:./build/index.js",
@@ -27,6 +31,14 @@
 		"displayFeaturedImage": {
 			"type": "boolean",
 			"default": true
+		},
+		"title": {
+			"type": "string",
+			"default": "Titel Beschreibung"
+		},
+		"description": {
+			"type": "string",
+			"default": "Inhalt Beschreibung"
 		}
 	}
 }

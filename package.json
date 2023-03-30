@@ -1,7 +1,7 @@
 {
-	"name": "dynamic-block-loop",
-	"version": "0.1.0",
-	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"name": "if-entity-loop",
+	"version": "1.0.0",
+	"description": "Get carousel with latest posts, pages, custom post types, filtered by taxonomy",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",

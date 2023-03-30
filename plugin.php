@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name:       Latest Posts Block
- * Description:       Latest Posts lOop.
+ * Plugin Name:       IF.Entity-Loop
+ * Description:       Get carousel with latest posts, pages, custom post types, filtered by taxonomy
  * Requires at least: 5.7
  * Requires PHP:      7.0
- * Version:           0.1.0
+ * Version:           1.0.0
  * Author:            Dominic Vogl
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -25,7 +25,7 @@ function render_loop() {
 }
 
 function dominic_vogl_latest_posts_block_render_callback($attributes) {
-	var_dump($attributes);
+	// var_dump($attributes);
 
 	$post_args = [
 		'posts_per_page' => $attributes['numberOfPosts'],

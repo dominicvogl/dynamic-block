@@ -3,7 +3,7 @@ import "./style.scss";
 import Edit from "./edit";
 import save from "./save";
 
-registerBlockType("dominicvogl/latest-posts", {
+registerBlockType("ifdigital/entity-loop", {
 	edit: Edit,
 	save,
 });

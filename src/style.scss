@@ -19,3 +19,25 @@
 		grid-gap: var(--gap-medium);
 	}
 }
+
+.wp-block-ifdigital-entity-loop {
+	position: relative;
+	display: flex;
+	gap: 2rem;
+
+	.content-wrapper {
+		flex: 1 0 33.333%;
+	}
+
+	.swiper {
+		flex: 1 1 auto;
+
+		.swiper-button-prev,
+		.swiper-button-next {
+			position: absolute;
+			background: red;
+			top: 0;
+			right: 0;
+		}
+	}
+}
