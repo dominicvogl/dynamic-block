@@ -83,7 +83,9 @@ class IF_Entity_Loop
 
 			if($attributes['displayFeaturedImage'] && has_post_thumbnail($post)) {
 				$output .= '<div class="image-wrapper">';
+				$output .= '<a href="'.esc_url($permalink).'">';
 				$output .= get_the_post_thumbnail($post, 'thumbnail');
+				$output .= '</a>';
 				$output .= '</div>';
 			}
 
@@ -109,9 +111,11 @@ class IF_Entity_Loop
 		$output .= '
 		<!-- If we need navigation buttons -->
 		<div class="swiper-buttons">
-		  <div class="swiper-button-prev"></div>
-		  <div class="swiper-button-next"></div>
-		  </div>
+			<div class="buttons-wrapper">
+			  <button class="swiper-button prev-slide" data-swiper-prev></button>
+			  <button class="swiper-button next-slide" data-swiper-next></button>
+		  	</div>
+	  	</div>
 		';
 		$output .= '<div class="container-content-inner">';
 		$output .= '<h2 class="small-title">' . $attributes['title'] . '</h2>';
