@@ -5,30 +5,41 @@
  * Replace them with your own styles or remove the file completely.
  */
 
+$breakpoint-xxl: 1440px;
+$breakpoint-xl: 1280px;
+$breakpoint-l: 1080px;
+$breakpoint-m: 960px;
+$breakpoint-d: 782px;
+$breakpoint-s: 600px;
+$breakpoint-xs: 480px;
+
 .wp-block-ifdigital-entity-loop {
 	--swiper-navigation-size: 2.5rem;
 
+	&:is(.alignfull) {
+		padding-inline: 0;
+	}
+
 	position: relative;
-	display: flex;
 	gap: 2rem;
 	border-top: 1px solid var(--wp--preset--color--brand-color-text-primary);
 	border-bottom: 1px solid var(--wp--preset--color--brand-color-text-primary);
 
 	.container-grid {
 		max-width: 100%;
-		display: flex;
 
 		.swiper {
 			flex: 1 1 auto;
 			padding-block: var(--gap-medium);
-			padding-inline-end: var(--gap-medium);
+			padding-inline: var(--wp--style--block-gap);
 		}
 
 		.container-content {
 			padding-block: var(--gap-medium);
-			border-left: 1px solid
+			padding-inline: var(--wp--style--block-gap);
+
+			border-top: 1px solid
 				var(--wp--preset--color--brand-color-text-primary);
-			padding-inline-start: var(--gap-medium);
 			flex: 0 1 33.333%;
 		}
 	}
@@ -38,14 +49,6 @@
 		display: flex;
 		justify-content: space-between;
 		flex-direction: column;
-	}
-
-	.swiper {
-		.swiper-button-prev,
-		.swiper-button-next {
-			position: absolute;
-			background: red;
-		}
 	}
 
 	.swiper-buttons {
@@ -138,5 +141,24 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.3rem;
+	}
+}
+
+@media screen and (min-width: #{$breakpoint-d}) {
+	.wp-block-ifdigital-entity-loop {
+		.container-grid {
+			display: flex;
+
+			.swiper {
+				padding-inline-end: var(--gap-medium);
+			}
+
+			.container-content {
+				border-top: none;
+				padding-inline-start: var(--gap-medium);
+				border-left: 1px solid
+					var(--wp--preset--color--brand-color-text-primary);
+			}
+		}
 	}
 }
