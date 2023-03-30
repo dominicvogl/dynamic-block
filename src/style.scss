@@ -5,39 +5,76 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-boilerplate {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
-}
-
-.wp-block-dominicvogl-latest-posts {
-	&.wp-block-dominicvogl-latest-posts {
-		list-style: none;
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-		grid-gap: var(--gap-medium);
-	}
-}
-
 .wp-block-ifdigital-entity-loop {
+	--swiper-navigation-size: 55px;
+
 	position: relative;
 	display: flex;
 	gap: 2rem;
+	border-top: 1px solid var(--wp--preset--color--brand-color-text-primary);
+	border-bottom: 1px solid var(--wp--preset--color--brand-color-text-primary);
 
-	.content-wrapper {
-		flex: 1 0 33.333%;
+	.container-grid {
+		max-width: 100%;
+		display: flex;
+
+		.swiper {
+			flex: 1 1 auto;
+			padding-block: var(--gap-medium);
+			padding-inline-end: var(--gap-medium);
+		}
+
+		.container-content {
+			padding-block: var(--gap-medium);
+			border-left: 1px solid
+				var(--wp--preset--color--brand-color-text-primary);
+			padding-inline-start: var(--gap-medium);
+			flex: 0 1 33.333%;
+		}
+	}
+
+	.container-content {
+		position: relative;
+		display: flex;
+		justify-content: flex-end;
+		flex-direction: column;
 	}
 
 	.swiper {
-		flex: 1 1 auto;
-
 		.swiper-button-prev,
 		.swiper-button-next {
 			position: absolute;
 			background: red;
-			top: 0;
-			right: 0;
 		}
+	}
+
+	.swiper-buttons {
+		background: red;
+		position: absolute;
+		top: calc(var(--swiper-navigation-size) * 0.5);
+		right: calc(var(--swiper-navigation-size) * 0.5);
+		display: flex;
+		flex-wrap: nowrap;
+	}
+
+	.post-term {
+		color: var(--wp--preset--color--brand-color-tertiary, #3f3f3f);
+	}
+
+	.swiper-slide {
+		h3 {
+			margin-block-end: 0;
+			text-transform: uppercase;
+			font-weight: var(--body-font-weight, 400);
+		}
+	}
+
+	.cateogry-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3rem;
 	}
 }

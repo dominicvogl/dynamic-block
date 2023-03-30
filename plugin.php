@@ -20,53 +20,109 @@
  *
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/writing-your-first-block-type/
  */
-function render_loop() {
 
-}
+class IF_Entity_Loop
+{
 
-function dominic_vogl_latest_posts_block_render_callback($attributes) {
-	// var_dump($attributes);
+	// Base variables
+	private $blockName;
+	private $taxonomy;
+	private $postType;
+	private $imageSize;
+	private $limit;
 
-	$post_args = [
-		'posts_per_page' => $attributes['numberOfPosts'],
-		'post_type' => 'portfolio',
-		'post_status' => 'publish'
-	];
+	public function __construct() {
+		$this->blockName = 'ifdigital/entity-loop';
+		$this->taxonomy  = 'filter';
+		$this->postType  = 'portfolio';
+		$this->imageSize = 'thumbnail';
+		$this->limit     = 1;
 
-	$recent_posts = get_posts($post_args);
-//	var_dump($recent_posts);
-
-	$output = '<ul ' . get_block_wrapper_attributes() . '>';
-	foreach($recent_posts as $post) {
-		$title = get_the_title($post);
-		$title = $title ? $title : __('(no title)', 'latest-posts');
-		$permalink = get_permalink($post);
-		$excerpt = get_the_excerpt($post);
-
-		$output .= '<li>';
-
-		if($attributes['displayFeaturedImage'] && has_post_thumbnail($post)) {
-			$output .= '<div class="post-thumbnail">';
-			$output .= get_the_post_thumbnail($post, 'thumbnail');
-			$output .= '</div>';
-		}
-
-		$output .= '<h3><a href="'.esc_url($permalink).'">' . $title . '</a></h3>';
-		$output .= '<time datetime="'.esc_attr(get_the_date('c', $post)).'">'.esc_html(get_the_date('', $post)).'</time>';
-		if(!empty($excerpt)) {
-			$output .= '<p>' . $excerpt . '</p>';
-		}
-		$output .= '</li>';
+		add_action( 'init', array($this, 'block_init') );
+		add_action( 'enqueue_block_assets', array($this, 'post_enqueue') );
 	}
-	$output .= '</ul>';
+
+	public function post_enqueue() {
+		if ( has_block( $this->blockName ) ) {
+			wp_enqueue_script( 'swiper', plugins_url( 'lib/swiper.js', __FILE__ ), '', '', true );
+			wp_enqueue_script( $this->blockName . 'initswiper', plugins_url( 'lib/init.js', __FILE__ ), '', '', true );
+		}
+	}
+
+	public function block_init() {
+		register_block_type_from_metadata( __DIR__, [
+			'render_callback' => array($this, 'block_render_callback'),
+		]);
+	}
 
 
-	return $output;
+	public function block_render_callback($attributes) {
+		$post_args = [
+			'posts_per_page' => $attributes['numberOfPosts'],
+			'post_type' => 'portfolio',
+			'post_status' => 'publish'
+		];
+
+		$recent_posts = get_posts($post_args);
+
+		$output = '<section ' . get_block_wrapper_attributes() . '>';
+		$output .= '<div class="container-grid">';
+
+		$output .= '<div class="swiper swiper-carousel" data-swiper-carousel>';
+		$output .= '<div class="swiper-wrapper">';
+		foreach($recent_posts as $post) {
+
+			$title = get_the_title($post);
+			$title = $title ? $title : __('(no title)', 'latest-posts');
+			$permalink = get_permalink($post);
+			$excerpt = get_the_excerpt($post);
+			$terms = get_the_terms($post, 'filter');
+
+
+			$output .= '<article class="swiper-slide wp-block-query-item">';
+
+			if($attributes['displayFeaturedImage'] && has_post_thumbnail($post)) {
+				$output .= '<div class="image-wrapper">';
+				$output .= get_the_post_thumbnail($post, 'thumbnail');
+				$output .= '</div>';
+			}
+
+			$output .= '<div class="content-wrapper">';
+
+			$output .= '<span class="post-term">';
+			if(!empty($terms && $terms[0])) {
+				$output .= $terms[0]->name;
+			}
+			else {
+				$output .= '&nbsp;';
+			}
+			$output .= '</span>';
+
+			$output .= '<h3><a href="'.esc_url($permalink).'">' . $title . '</a></h3>';
+			$output .= '</div>';
+
+			$output .= '</article>';
+		}
+		$output .= '</div>';
+		$output .= '</div>';
+		$output .= '<div class="container-content">';
+		$output .= '
+		<!-- If we need navigation buttons -->
+		<div class="swiper-buttons">
+		  <div class="swiper-button-prev"></div>
+		  <div class="swiper-button-next"></div>
+		  </div>
+		';
+		$output .= '<div class="container-content-inner">';
+		$output .= '<h2 class="small-title">' . $attributes['title'] . '</h2>';
+		$output .= $attributes['description'];
+		$output .= '</div>';
+		$output .= '</div>';
+		$output .= '</div>';
+		$output .= '</section>';
+
+		return $output;
+	}
 }
 
-function dominic_vogl_latest_posts_block_init() {
-	register_block_type_from_metadata( __DIR__, [
-		'render_callback' => 'dominic_vogl_latest_posts_block_render_callback',
-	]);
-}
-add_action( 'init', 'dominic_vogl_latest_posts_block_init' );
+new IF_Entity_Loop();
