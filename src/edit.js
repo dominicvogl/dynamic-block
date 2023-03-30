@@ -56,11 +56,8 @@ const Edit = (props) => {
 		<section {...useBlockProps()}>
 			<div className="container-grid">
 				<Swiper
-					modules={[Navigation]}
-					navigation={true}
-					spaceBetween={50}
+					spaceBetween={40}
 					slidesPerView={3}
-					onSlideChange={() => console.log("slide change")}
 					onSwiper={(swiper) => console.log(swiper)}
 				>
 					{posts &&
@@ -73,58 +70,61 @@ const Edit = (props) => {
 
 							return (
 								<SwiperSlide key={post.id}>
-									<ul>
+									<article>
 										{displayFeaturedImage &&
 											featuredImage && (
-												<img
-													src={
-														featuredImage
-															.media_details.sizes
-															.medium.source_url
-													}
-													alt={featuredImage.alt_text}
-												/>
+												<div
+													className={"image-wrapper"}
+												>
+													<img
+														src={
+															featuredImage
+																.media_details
+																.sizes.medium
+																.source_url
+														}
+														alt={
+															featuredImage.alt_text
+														}
+													/>
+												</div>
 											)}
-										<h3>
-											<a href={post.link}>
-												{post.title.rendered ? (
-													<RawHTML>
-														{post.title.rendered}
-													</RawHTML>
-												) : (
-													__(
-														"No title",
-														"dynamic-block"
-													)
-												)}
-											</a>
-										</h3>
-									</ul>
+										<div className="content-wrapper">
+											<span className={"post-term"}>
+												&nbsp;
+											</span>
+											<h3>{post.title.rendered}</h3>
+										</div>
+									</article>
 								</SwiperSlide>
 							);
 						})}
 				</Swiper>
 				<div className="container-content">
-					<RichText
-						tagName="h2"
-						value={title}
-						onChange={onChangeTitle}
-						placeholder={__(
-							"Type in some headline",
-							"if-entity-loop"
-						)}
-						allowedFormats={[]}
-					/>
-					<RichText
-						tagName="p"
-						value={description}
-						onChange={onChangeDescription}
-						placeholder={__(
-							"Type in some Content",
-							"if-entity-loop"
-						)}
-						allowedFormats={[]}
-					/>
+					<div className={"swiper-buttons"}></div>
+					<div className={"container-content-inner"}>
+						<RichText
+							tagName="h2"
+							className={"small-title"}
+							value={title}
+							onChange={onChangeTitle}
+							placeholder={__(
+								"Type in some headline",
+								"if-entity-loop"
+							)}
+							allowedFormats={[]}
+						/>
+						<RichText
+							tagName="p"
+							value={description}
+							onChange={onChangeDescription}
+							placeholder={__(
+								"Type in some Content",
+								"if-entity-loop"
+							)}
+							allowedFormats={[]}
+						/>
+					</div>
 				</div>
 			</div>
 		</section>

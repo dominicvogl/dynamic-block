@@ -119,7 +119,7 @@ class IF_Entity_Loop
 		';
 		$output .= '<div class="container-content-inner">';
 		$output .= '<h2 class="small-title">' . $attributes['title'] . '</h2>';
-		$output .= $attributes['description'];
+		$output .= '<p>' . $attributes['description'] . '</p>';
 		$output .= '</div>';
 		$output .= '</div>';
 		$output .= '</div>';
