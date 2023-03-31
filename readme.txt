@@ -6,6 +6,10 @@ Stable tag:        0.1.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
+== Status ==
+
+[![Build Plugin](https://github.com/dominicvogl/dynamic-block/actions/workflows/main.yml/badge.svg)](https://github.com/dominicvogl/dynamic-block/actions/workflows/main.yml)
+
 Example block written with ESNext standard and JSX support – build step required.
 
 == Description ==
