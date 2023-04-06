@@ -16,7 +16,7 @@ $breakpoint-xs: 480px;
 .wp-block-ifdigital-entity-loop {
 	--swiper-navigation-size: 2.5rem;
 
-	&:is(.alignfull) {
+	&.alignfull {
 		padding-inline: 0;
 	}
 
@@ -131,6 +131,8 @@ $breakpoint-xs: 480px;
 			margin-block-end: 0;
 			text-transform: uppercase;
 			font-weight: var(--body-font-weight, 400);
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 	}
 
@@ -141,6 +143,10 @@ $breakpoint-xs: 480px;
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.3rem;
+	}
+
+	.image-wrapper {
+		aspect-ratio: 3 / 4;
 	}
 }
 

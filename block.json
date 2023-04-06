@@ -28,6 +28,24 @@
 			"type": "number",
 			"default": 4
 		},
+		"includedIds": {
+			"type": "string",
+			"default": ""
+		},
+		"order": {
+			"type": "string",
+			"default": "desc"
+		},
+		"orderBy": {
+			"type": "string",
+			"default": "date"
+		},
+		"categories": {
+			"type": "array",
+			"items": {
+				"type": "object"
+			}
+		},
 		"displayFeaturedImage": {
 			"type": "boolean",
 			"default": true
