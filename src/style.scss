@@ -27,9 +27,12 @@ $breakpoint-xs: 480px;
 
 	.container-grid {
 		max-width: 100%;
+		display: flex;
+		flex-direction: column-reverse;
 
 		.swiper {
 			flex: 1 1 auto;
+			max-width: 100%;
 			padding-block: var(--gap-medium);
 			padding-inline: var(--wp--style--block-gap);
 		}
@@ -37,7 +40,6 @@ $breakpoint-xs: 480px;
 		.container-content {
 			padding-block: var(--gap-medium);
 			padding-inline: var(--wp--style--block-gap);
-
 			border-top: 1px solid
 				var(--wp--preset--color--brand-color-text-primary);
 			flex: 0 1 33.333%;
@@ -154,6 +156,7 @@ $breakpoint-xs: 480px;
 	.wp-block-ifdigital-entity-loop {
 		.container-grid {
 			display: flex;
+			flex-direction: row;
 
 			.swiper {
 				padding-inline-end: var(--gap-medium);

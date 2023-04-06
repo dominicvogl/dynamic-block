@@ -57,11 +57,32 @@ class IF_Entity_Loop
 
 
 	public function block_render_callback($attributes) {
+
+		$category_ids = [];
+
+
+		if(!empty($attributes['categories'])) {
+			$category_ids = array_map(function($category) {
+				return $category['id'];
+			}, $attributes['categories']);
+		}
+
 		$post_args = [
 			'posts_per_page' => $attributes['numberOfPosts'],
 			'post_type' => 'portfolio',
 			'post_status' => 'publish'
 		];
+
+		// Füge die tax_query hinzu, wenn Kategorien ausgewählt sind
+		if (count($category_ids) > 0) {
+			$post_args['tax_query'] = [
+				[
+					'taxonomy' => $this->taxonomy,
+					'field' => 'term_id',
+					'terms' => $category_ids,
+				],
+			];
+		}
 
 		$recent_posts = get_posts($post_args);
 

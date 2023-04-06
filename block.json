@@ -28,10 +28,6 @@
 			"type": "number",
 			"default": 4
 		},
-		"includedIds": {
-			"type": "string",
-			"default": ""
-		},
 		"order": {
 			"type": "string",
 			"default": "desc"

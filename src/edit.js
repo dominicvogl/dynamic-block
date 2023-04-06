@@ -1,5 +1,4 @@
 import { __ } from "@wordpress/i18n";
-// import React, { useRef, useState } from "react";
 import {
 	useBlockProps,
 	RichText,
@@ -7,14 +6,12 @@ import {
 } from "@wordpress/block-editor";
 import { useSelect } from "@wordpress/data";
 import { PanelBody, ToggleControl, QueryControls } from "@wordpress/components";
-// import { RawHTML } from "@wordpress/element";
-// import { format, dateI18n, getSettings } from "@wordpress/date";
+import { RawHTML } from "@wordpress/element";
 import "./editor.scss";
 
 // swiper JS
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -25,24 +22,23 @@ const Edit = (props) => {
 		description,
 		numberOfPosts,
 		displayFeaturedImage,
-		includedIds,
 		order,
 		orderBy,
 		categories,
 	} = attributes;
 
-	const catIDs =
-		categories && categories.length > 0
-			? categories.map((cat) => cat.id)
-			: [];
-
 	// CALLBACKS
+
 	/**
 	 * set the new title in the attributes
 	 * @param newText
 	 */
 	const onChangeTitle = (newText) => {
 		setAttributes({ title: newText });
+	};
+
+	const onChangeCallback = (field, newValue) => {
+		setAttributes({ field: newValue });
 	};
 
 	const onDisplayFeaturedImageChange = (value) => {
@@ -66,6 +62,12 @@ const Edit = (props) => {
 		});
 	}, []);
 
+	// CATEGORY FILTER STUFF
+	const catIDs =
+		categories && categories.length > 0
+			? categories.map((cat) => cat.id)
+			: [];
+
 	const catSuggestions = {};
 	if (allCats) {
 		for (let i = 0; i < allCats.length; i++) {
@@ -87,16 +89,20 @@ const Edit = (props) => {
 		setAttributes({ categories: updatedCats });
 	};
 
+	// QUERY THE POSTS
 	const { posts } = useSelect(
 		(select) => {
 			const postType = "portfolio";
 			const { getEntityRecords } = select("core");
+			const { getCurrentPostId } = select("core/editor");
+			const currentPostId = getCurrentPostId();
 			const latestPostsQuery = {
 				per_page: numberOfPosts,
 				_embed: displayFeaturedImage,
 				order,
 				orderby: orderBy,
 				filter: catIDs,
+				exclude: [currentPostId],
 			};
 			return {
 				posts: getEntityRecords("postType", postType, latestPostsQuery),
@@ -104,8 +110,6 @@ const Edit = (props) => {
 		},
 		[numberOfPosts, displayFeaturedImage, order, orderBy, categories]
 	);
-
-	console.log(posts);
 
 	return (
 		<>
@@ -179,7 +183,11 @@ const Edit = (props) => {
 												<span className={"post-term"}>
 													&nbsp;
 												</span>
-												<h3>{post.title.rendered}</h3>
+												<h3>
+													<RawHTML>
+														{post.title.rendered}
+													</RawHTML>
+												</h3>
 											</div>
 										</article>
 									</SwiperSlide>
